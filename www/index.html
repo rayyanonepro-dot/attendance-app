@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#174238"><meta name="mobile-web-app-capable" content="yes">
+<title>سجل الغياب والمواظبة</title>
+<style>
+:root{--bg:#e8f0ec;--grid:rgba(23,66,56,.07);--cd:#fbfdfb;--tx:#15302a;--mu:#5f7a72;--pri:#174238;--pri2:#0f2f27;--gold:#f4d35e;--ok:#1f7a4d;--okbg:#e1f3e8;--bad:#d1432b;--hf:#e08a00;--bd:#cddbd4;--m:#2a7fa6;--f:#c2478a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1c18;--grid:rgba(244,211,94,.045);--cd:#142923;--tx:#e3f0ea;--mu:#8fb0a4;--bd:#25423a;--pri:#0f2f27;--pri2:#0a221c;--ok:#59c98d;--okbg:#173a2c;--bad:#ff7a60;--hf:#f2a93b;--m:#5cb8e0;--f:#ef7ab5}}
+:root[data-theme="dark"]{--bg:#0c1c18;--grid:rgba(244,211,94,.045);--cd:#142923;--tx:#e3f0ea;--mu:#8fb0a4;--bd:#25423a;--pri:#0f2f27;--pri2:#0a221c;--ok:#59c98d;--okbg:#173a2c;--bad:#ff7a60;--hf:#f2a93b;--m:#5cb8e0;--f:#ef7ab5}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg)}
+body{margin:0;color:var(--tx);font:15px/1.5 Tajawal,"Segoe UI",Tahoma,Arial,sans-serif;max-width:640px;margin-inline:auto;min-height:100vh;background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--pri);z-index:10}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:linear-gradient(180deg,var(--pri),var(--pri2));color:#fff;padding:10px 12px 12px;border-radius:0 0 28px 28px;border-bottom:3px solid var(--gold);box-shadow:0 8px 18px -10px rgba(10,34,28,.7)}
+.row{display:flex;gap:6px;margin:5px 0}
+select,input,button{font:inherit;border-radius:12px;border:1.5px solid var(--bd);background:var(--cd);color:var(--tx);padding:8px;min-height:42px}
+select:focus-visible,input:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
+select,input{flex:1;min-width:0}
+header select,header input,header button{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.28)}
+header option{color:#15302a}
+header button{flex:0 0 44px;padding:0;font-size:20px}
+#td{flex:0 0 auto;padding:0 14px;background:var(--gold);color:#15302a;border:0;font-weight:800;font-size:15px}
+.bn{background:var(--gold);color:#15302a;border-radius:10px 10px 10px 2px;padding:5px 12px;margin:7px 0 0;font-weight:700;display:inline-block}
+nav{display:flex;gap:0;margin:14px 12px 0;padding:4px;background:var(--cd);border:1.5px solid var(--bd);border-radius:16px}
+nav button{flex:1;font-weight:700;border:0;background:transparent;border-radius:12px}
+nav .on{background:var(--pri);color:#fff}
+main{padding:12px}
+.r{display:flex;align-items:center;gap:6px;background:var(--cd);border:1.5px solid var(--bd);border-inline-start:7px solid var(--m);border-radius:6px 16px 16px 6px;padding:8px 8px 8px 10px;margin-bottom:7px}
+.r.f{border-inline-start-color:var(--f)}
+.nm{flex:1;min-width:0}.nm b{font-size:16px;font-weight:700}.nm small{display:block;color:var(--mu)}
+.st{min-width:92px;font-weight:800;border-radius:10px}
+.sp{color:var(--ok);background:var(--okbg);border-color:transparent}
+.sa{background:var(--bad);color:#fff;border-color:var(--bad);transform:rotate(-2deg)}
+.sh{background:linear-gradient(135deg,var(--hf) 50%,var(--okbg) 50%);color:#3b2600;border-color:var(--hf)}
+.nt,.x{flex:0 0 40px;padding:0;border-radius:50%}.x{color:var(--bad)}
+button:disabled{opacity:.35}
+.card{background:var(--cd);border:1.5px solid var(--bd);border-radius:20px 6px 20px 6px;padding:12px;margin-bottom:12px}
+.card h3{margin:0 0 8px;font-size:17px;font-weight:800;color:var(--pri)}
+@media (prefers-color-scheme:dark){.card h3{color:var(--gold)}}
+.g{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;gap:6px}.g b{font-size:24px;display:block;font-weight:800}.g small,.mu{color:var(--mu)}
+table{width:100%;border-collapse:collapse}td,th{padding:6px 4px;text-align:center;border-bottom:1px dashed var(--bd)}th{color:var(--mu);font-weight:700}td:first-child{text-align:start}
+.li{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--bd)}.hi{color:var(--bad);font-weight:800}
+footer{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:6px 12px 24px}
+footer button{font-weight:700}
+#exm,#ex{background:var(--pri);color:#fff;border-color:var(--pri);border-bottom:3px solid var(--gold)}
+@media (prefers-reduced-motion:no-preference){.st,nav button{transition:transform .12s,background .12s}}
+</style><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet"></head><body>
+<header>
+<div class="row"><select id="c"></select><select id="m"></select></div>
+<div class="row"><button id="pv">›</button><input type="date" id="d" min="2026-09-01" max="2027-06-30"><button id="nx">‹</button><button id="td">اليوم</button></div>
+<div id="bn"></div></header>
+<nav><button data-t="0">تسجيل الغياب</button><button data-t="1">الملخص</button></nav>
+<main id="v"></main>
+<footer><button id="ac">+ فوج جديد</button><button id="ed">تعديل القائمة</button><button id="cp">نسخ احتياطي</button><button id="im">استيراد</button><button id="exm">تحميل صفحة الشهر</button><button id="ex">تصدير السنة كاملة</button><button id="ins">تثبيت على الشاشة</button></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
+<script>
+const MN=['شتنبر','أكتوبر','نونبر','دجنبر','يناير','فبراير','مارس','أبريل','ماي','يونيو'],MM=[9,10,11,12,1,2,3,4,5,6],YR=i=>i<4?2026:2027,DN=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],NT=['','غياب بمبرر','غياب بدون مبرر','لم يلتحق'];
+const E={"h":[["2026-09-01","قبل الدخول المدرسي"],["2026-09-02","يوم الدخول المدرسي (توقيع محضر الدخول)"],["2026-10-18","الفترة البينية الأولى"],["2026-10-19","الفترة البينية الأولى"],["2026-10-20","الفترة البينية الأولى"],["2026-10-21","الفترة البينية الأولى"],["2026-10-22","الفترة البينية الأولى"],["2026-10-23","الفترة البينية الأولى"],["2026-10-24","الفترة البينية الأولى"],["2026-10-25","الفترة البينية الأولى"],["2026-10-31","عيد الوحدة"],["2026-11-06","ذكرى المسيرة الخضراء"],["2026-11-18","عيد الاستقلال"],["2026-12-06","الفترة البينية الثانية"],["2026-12-07","الفترة البينية الثانية"],["2026-12-08","الفترة البينية الثانية"],["2026-12-09","الفترة البينية الثانية"],["2026-12-10","الفترة البينية الثانية"],["2026-12-11","الفترة البينية الثانية"],["2026-12-12","الفترة البينية الثانية"],["2026-12-13","الفترة البينية الثانية"],["2027-01-01","فاتح السنة الميلادية"],["2027-01-11","ذكرى تقديم وثيقة الاستقلال"],["2027-01-14","فاتح السنة الأمازيغية"],["2027-01-24","عطلة منتصف السنة الدراسية"],["2027-01-25","عطلة منتصف السنة الدراسية"],["2027-01-26","عطلة منتصف السنة الدراسية"],["2027-01-27","عطلة منتصف السنة الدراسية"],["2027-01-28","عطلة منتصف السنة الدراسية"],["2027-01-29","عطلة منتصف السنة الدراسية"],["2027-01-30","عطلة منتصف السنة الدراسية"],["2027-01-31","عطلة منتصف السنة الدراسية"],["2027-03-08","عيد الفطر (29 رمضان – 2 شوال 1448؛ تواريخ تقديرية)"],["2027-03-09","عيد الفطر (29 رمضان – 2 شوال 1448؛ تواريخ تقديرية)"],["2027-03-10","عيد الفطر (29 رمضان – 2 شوال 1448؛ تواريخ تقديرية)"],["2027-03-11","عيد الفطر (29 رمضان – 2 شوال 1448؛ تواريخ تقديرية)"],["2027-03-21","الفترة البينية الثالثة"],["2027-03-22","الفترة البينية الثالثة"],["2027-03-23","الفترة البينية الثالثة"],["2027-03-24","الفترة البينية الثالثة"],["2027-03-25","الفترة البينية الثالثة"],["2027-03-26","الفترة البينية الثالثة"],["2027-03-27","الفترة البينية الثالثة"],["2027-03-28","الفترة البينية الثالثة"],["2027-05-01","عيد الشغل"],["2027-05-09","الفترة البينية الرابعة"],["2027-05-10","الفترة البينية الرابعة"],["2027-05-11","الفترة البينية الرابعة"],["2027-05-12","الفترة البينية الرابعة"],["2027-05-13","الفترة البينية الرابعة"],["2027-05-14","الفترة البينية الرابعة"],["2027-05-15","الفترة البينية الرابعة"],["2027-05-16","الفترة البينية الرابعة"],["2027-05-17","عيد الأضحى (9 – 11 ذي الحجة 1448؛ تواريخ تقديرية)"],["2027-05-18","عيد الأضحى (9 – 11 ذي الحجة 1448؛ تواريخ تقديرية)"],["2027-06-07","فاتح محرم 1449 (تاريخ تقديري)"]],"c":{"5APG-1":{"r":[[["اغكومي عبد الله","م"],["اكدم حليمة","ث"],["الزوبير أناس","ث"],["بكامل  خولة","ث"],["اوجنها محمد","م"],["كونزار غزلان","ث"],["طلحاوي هبة","ث"],["عباد مروة","ث"],["بومهدي أشرف","م"],["البوركي عمران","م"],["الكوني نور","ث"],["لعريشي حفصة","ث"],["بوعدي سارة","ث"],["المولاحي مريم","ث"],["ايت مبارك فردوس","ث"],["ايت بوزيد فاطمة","ث"],["بوكمية نعمة","ث"],["كعزاب جنات","ث"],["محضي فاطمة","ث"],["الحنش محمد امين","م"],["العيدون يوسف طه","م"],["اعويدات مروة","ث"],["القباب عماد","م"],["ايت اوسليمان خديجة","ث"]],[["المسافر خديجة","ث"],["المسافر عبدالله","م"],["ايت سعيد أنس","م"],["أيت أسليمان خديجة","ث"],["الطوهري مريم","ث"],["المعروفي فرح","ث"],["اغكومي عبد الله","م"],["الطويل يوسف","م"],["بوفول ملاك","ث"],["بوالزيت مريم","ث"],["ابوبيه خديجة","ث"],["فخوري عمران","م"],["غناج ريان","م"],["بوعدي سارة","ث"],["توفيق يوسف","م"],["ابضار خديجة","ث"],["ناصر مريم","ث"],["بنعدي فردوس","ث"],["اهدراش هناء","ث"],["محضي فاطمة","ث"],["الحيان ملاك","ث"],["ايت بوزيد فاطمة","ث"],["اركي ابتسام","ث"],["العيدون يوسف طه","م"]]],"rm":[0,1,1,1,1,1,1,1,1,1],"k":{"شتنبر":{"10":{"09-22":"+","09-23":"+","09-24":"+"},"19":{"09-16":"+","09-17":"+","09-18":"+"},"21":{"09-23":"+","09-24":"+","09-25":"+"},"22":{"09-22":"+"}},"أكتوبر":{"5":{"10-27":"+"},"7":{"10-27":"+"},"14":{"10-27":"+"},"19":{"10-03":"+"}},"نونبر":{"0":{"11-05":"+"},"1":{"11-05":"+"},"5":{"11-14":"+"},"13":{"11-10":"+"},"14":{"11-07":"+"},"15":{"11-09":"+","11-13":"+","11-14":"+"},"16":{"11-14":"+"},"18":{"11-07":"+"}}}},"5APG-2":{"r":[[["اوشطر وليد","م"],["المسافر خديجة","ث"],["قلعيدي محمدرضى","م"],["ايت سعيد أنس","م"],["الطوهري مريم","ث"],["بوفول ملاك","ث"],["فخوري عمران","م"],["حنزاز سليمان","م"],["ابضار خديجة","ث"],["عروز دعاء","ث"],["المسافر عبدالله","م"],["باسو مريم","ث"],["المحمدي عمر","م"],["طيان اسماعيل","م"],["مليه خديجة","ث"],["اهدراش هناء","ث"],["حمداني عبد الكبير","م"],["بوالزيت مريم","ث"],["الزولي دعاء","ث"],["طالبي يحيى","م"],["شكري محمد","م"]],[["طالبي يحيى","م"],["الحلاوي امل","ث"],["اد مختار اسية","ث"],["البوركي عمران","م"],["مليه خديجة","ث"],["الكوني نور","ث"],["ازمو الياس","م"],["الخروبي ادم","م"],["لعريشي حفصة","ث"],["مسعودي اسية","ث"],["حنزاز سليمان","م"],["اوشطر وليد","م"],["ايت محمد حسام","م"],["القرفي اية","ث"],["عباد مروة","ث"],["اكرمان عمران","م"],["عروز دعاء","ث"],["اعويدات مروة","ث"],["بومهدي اشرف","م"],["ازطام اسية","ث"],["اصرحان هبة","ث"],["القباب عماد","م"],["ايت محمد هدى","ث"]]],"rm":[0,1,1,1,1,1,1,1,1,1],"k":{"شتنبر":{"1":{"09-26":"+","09-29":"+","09-30":"+","n":"غياب بدون مبرر"},"2":{"09-25":"+","n":"غياب بدون مبرر"},"9":{"09-25":"+","n":"غياب بدون مبرر"},"10":{"09-26":"+","09-30":"+","n":"غياب بدون مبرر"},"11":{"09-12":"+","n":"غياب بدون مبرر"},"13":{"n":"التحق بالفوج 3"},"16":{"09-12":"+","n":"غياب بدون مبرر"},"19":{"09-21":"+","n":"غياب بدون مبرر"},"20":{"09-14":"+","n":"غياب بدون مبرر"}},"أكتوبر":{"7":{"10-26":"+","n":"غياب بدون مبرر"},"10":{"10-01":"+","10-02":"+","10-03":"+","n":"غياب بدون مبرر"},"14":{"10-28":"+"},"19":{"10-26":"+","n":"غياب بدون مبرر"},"20":{"10-26":"+","n":"غياب بدون مبرر"}},"نونبر":{"0":{"11-03":"+"},"4":{"11-07":"+"},"5":{"11-14":"+"},"7":{"11-03":"+","11-07":"+","11-09":"+","11-10":"+","11-11":"+","11-13":"+","11-17":"+"},"13":{"11-13":"+"}}}}}};
+const HOL=Object.fromEntries(E.h),$=s=>document.querySelector(s),pad=n=>String(n).padStart(2,'0');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const n0=new Date(),tod=n0.getFullYear()+'-'+pad(n0.getMonth()+1)+'-'+pad(n0.getDate());
+const inR=d=>d>='2026-09-01'&&d<='2027-06-30',mIdx=d=>MM.indexOf(+d.slice(5,7)),isSch=d=>new Date(d+'T00:00:00').getDay()!=0&&!HOL[d];
+let DB,S={t:0,e:0,d:inR(tod)?tod:'2026-09-01'};
+try{DB=JSON.parse(localStorage.getItem('abs26'))}catch(e){}
+if(!DB){DB={};for(const c in E.c){const o=E.c[c];DB[c]={};MN.forEach((m,i)=>DB[c][m]={s:o.r[o.rm[i]].map(x=>x.slice()),m:JSON.parse(JSON.stringify(o.k[m]||{}))})}}
+S.c=Object.keys(DB)[0];
+const save=()=>{try{localStorage.setItem('abs26',JSON.stringify(DB))}catch(e){}};
+const mdays=i=>{const y=YR(i),m=MM[i],a=[];for(let d=1;d<=31;d++){if(new Date(y,m-1,d).getMonth()!=m-1)break;const s=y+'-'+pad(m)+'-'+pad(d);if(isSch(s))a.push(s)}return a};
+const cur=()=>DB[S.c][MN[mIdx(S.d)]];
+function stat(c,i){const o=DB[c][MN[i]],D=mdays(i),ac=o.s.filter((_,k)=>(o.m[k]||{}).n!='لم يلتحق').length;let ab=0;
+ const per=o.s.map((_,k)=>{const mk=o.m[k]||{};let a=0;if(mk.n!='لم يلتحق')D.forEach(d=>{const v=mk[d.slice(5)];a+=v=='+'?2:v=='-'?1:0});ab+=a;return a});
+ const tot=D.length*2*ac;return{D,per,ab,tot,pct:tot?Math.floor((tot-ab)*10000/tot)/100:0}}
+function rDay(){const o=cur(),sc=isSch(S.d),k=S.d.slice(5),st=stat(S.c,mIdx(S.d));
+ return o.s.length?o.s.map((s,i)=>{const mk=o.m[i]||{},v=mk[k]||'';
+ return `<div class="r ${s[1]=='ث'?'f':''}"><div class="nm"><b>${esc(s[0])}</b><small>${mk.n?esc(mk.n)+' · ':''}غياب الشهر: ${st.per[i]}</small></div>`+
+ (S.e?`<button class="x" data-a="del" data-i="${i}">✕</button>`:`<button class="nt" data-a="nt" data-i="${i}">⋯</button><button class="st ${v=='+'?'sa':v=='-'?'sh':'sp'}" data-a="mk" data-i="${i}" ${sc?'':'disabled'}>${v=='+'?'غياب يوم':v=='-'?'نصف يوم':'حاضر'}</button>`)+'</div>'}).join('')+(S.e?'<button data-a="add" style="width:100%">+ إضافة متعلم</button>':''):'<p class="mu">لا يوجد متعلمون. اضغط «تعديل القائمة» ثم «إضافة متعلم».</p>'}
+function rSum(){const i=mIdx(S.d),st=stat(S.c,i),o=cur();let T=0,A=0;
+ const an=MN.map((m,j)=>{const x=stat(S.c,j);T+=x.tot;A+=x.ab;return `<tr><td>${m}</td><td>${x.D.length}</td><td>${x.ab}</td><td>${x.pct}%</td></tr>`}).join('');
+ return `<div class="card"><h3>${MN[i]} ${YR(i)}</h3><div class="g"><div><b>${st.D.length}</b><small>أيام الدراسة</small></div><div><b>${st.ab}</b><small>أنصاف أيام الغياب</small></div><div><b>${st.pct}%</b><small>المواظبة</small></div></div></div>`+
+ `<div class="card"><h3>غياب المتعلمين هذا الشهر (أنصاف أيام)</h3>${o.s.map((s,k)=>`<div class="li ${st.per[k]?'hi':''}"><span>${esc(s[0])}</span><span>${st.per[k]}</span></div>`).join('')||'<span class="mu">لا توجد بيانات</span>'}</div>`+
+ `<div class="card"><h3>الجدول السنوي</h3><table><tr><th></th><th>أيام</th><th>غياب</th><th>النسبة</th></tr>${an}<tr><th>السنة</th><th></th><th>${A}</th><th>${T?Math.floor((T-A)*10000/T)/100:0}%</th></tr></table></div>`}
+function render(){const i=mIdx(S.d);
+ $('#c').innerHTML=Object.keys(DB).map(c=>`<option ${c==S.c?'selected':''}>${esc(c)}</option>`).join('');
+ $('#m').innerHTML=MN.map((m,j)=>`<option value="${j}" ${j==i?'selected':''}>${m} ${YR(j)}</option>`).join('');
+ $('#d').value=S.d;
+ $('#bn').innerHTML=(S.d==tod?'<div class="bn">اليوم — '+DN[new Date(S.d+'T00:00:00').getDay()]+'</div>':'<div class="bn" style="background:none;color:#fff;padding:0">'+DN[new Date(S.d+'T00:00:00').getDay()]+'</div>')+(isSch(S.d)?'':'<div class="bn">'+(HOL[S.d]?'عطلة: '+esc(HOL[S.d]):'يوم الأحد: لا دراسة')+'</div>');
+ document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',+b.dataset.t==S.t));
+ $('#ed').textContent=S.e?'إنهاء التعديل':'تعديل القائمة';
+ $('#v').innerHTML=S.t?rSum():rDay()}
+function step(n){let d=new Date(S.d+'T00:00:00');for(let k=0;k<40;k++){d.setDate(d.getDate()+n);const s=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());if(!inR(s))return;if(isSch(s)){S.d=s;return}}}
+$('#c').onchange=e=>{S.c=e.target.value;render()};
+$('#m').onchange=e=>{const j=+e.target.value,y=YR(j),m=MM[j];S.d=tod.slice(0,7)==y+'-'+pad(m)?tod:(mdays(j)[0]||y+'-'+pad(m)+'-01');render()};
+$('#d').onchange=e=>{if(inR(e.target.value)){S.d=e.target.value}render()};
+$('#pv').onclick=()=>{step(-1);render()};$('#nx').onclick=()=>{step(1);render()};$('#td').onclick=()=>{if(inR(tod))S.d=tod;render()};
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{S.t=+b.dataset.t;render()});
+$('#ed').onclick=()=>{S.e=!S.e;S.t=0;render()};
+$('#ac').onclick=()=>{const n=(prompt('اسم الفوج الجديد')||'').trim();if(!n||DB[n])return;DB[n]={};MN.forEach(m=>DB[n][m]={s:[],m:{}});S.c=n;save();render()};
+$('#cp').onclick=async()=>{const t=JSON.stringify(DB);try{await navigator.clipboard.writeText(t);alert('تم نسخ البيانات. الصقها في ملاحظة للاحتفاظ بها.')}catch(e){prompt('انسخ هذا النص',t)}};
+$('#im').onclick=()=>{const t=prompt('الصق النص المنسوخ سابقاً');if(!t)return;try{const o=JSON.parse(t);if(o&&typeof o=='object'){DB=o;S.c=Object.keys(DB)[0];save();render()}}catch(e){alert('نص غير صالح')}};
+$('#v').onclick=e=>{const b=e.target.closest('button');if(!b)return;const a=b.dataset.a,i=+b.dataset.i,mi=mIdx(S.d),o=cur();
+ if(a=='mk'||a=='nt'){const mk=o.m[i]=o.m[i]||{};
+  if(a=='mk'){const k=S.d.slice(5),v=mk[k]||'',n=v==''?'+':v=='+'?'-':'';if(n)mk[k]=n;else delete mk[k]}
+  else{const n=NT[(NT.indexOf(mk.n||'')+1)%4];if(n)mk.n=n;else delete mk.n}}
+ if(a=='add'){const n=(prompt('اسم المتعلم(ة)')||'').trim();if(!n)return;const g=confirm('هل هو ذكر؟ موافق = ذكر، إلغاء = أنثى')?'م':'ث';for(let j=mi;j<10;j++)DB[S.c][MN[j]].s.push([n,g])}
+ if(a=='del'){if(!confirm('حذف '+o.s[i][0]+' من هذا الشهر وما بعده؟'))return;
+  for(let j=mi;j<10;j++){const p=DB[S.c][MN[j]],nm={};p.s.splice(i,1);for(const k in p.m){const q=+k;if(q<i)nm[q]=p.m[k];else if(q>i)nm[q-1]=p.m[k]}p.m=nm}}
+ save();render()};
+let DL={save:o=>saveF(o.filename,o.data)};
+async function saveF(n,b){
+ const f=new File([b],n,{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+ try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:n});return}}catch(e){if(e&&e.name=='AbortError')return}
+ const u=URL.createObjectURL(f),a=document.createElement('a');a.href=u;a.download=n;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);
+ alert('تم طلب التحميل. إن لم يبدأ، افتح الرابط مباشرة في متصفح Chrome، أو استعمل «نسخ احتياطي» لحفظ البيانات.')}
+try{window.claude&&claude.use('downloads').then(d=>{if(d)DL=d})}catch(e){}
+$('#ex').onclick=async()=>{
+ if(!window.XLSX||!DL)return alert('التصدير غير متاح الآن');
+ const wb=XLSX.utils.book_new(),c=S.c,add=(r,n)=>XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(r),n);
+ const an=[['الشهر','أيام الدراسة','أنصاف أيام الدراسة','أنصاف أيام الغياب','أنصاف أيام الحضور','النسبة %']];let T=0,A=0;
+ MN.forEach((m,j)=>{const x=stat(c,j);T+=x.tot;A+=x.ab;an.push([m+' '+YR(j),x.D.length,x.tot,x.ab,x.tot-x.ab,x.pct])});
+ an.push(['المجموع','',T,A,T-A,T?Math.floor((T-A)*10000/T)/100:0]);add(an,'الملخص السنوي');
+ MN.forEach((m,j)=>{const o=DB[c][m],x=stat(c,j),r=[['#','الاسم','النوع',...x.D.map(d=>d.slice(8)+'/'+d.slice(5,7)),'غياب (أنصاف أيام)','ملاحظات']];
+  o.s.forEach((s,k)=>{const mk=o.m[k]||{};r.push([k+1,s[0],s[1]=='م'?'ذكر':'أنثى',...x.D.map(d=>mk[d.slice(5)]||''),x.per[k],mk.n||''])});add(r,m)});
+ wb.Workbook={Views:[{RTL:true}]};
+ try{await DL.save({filename:'الغياب-'+c+'.xlsx',data:new Blob([XLSX.write(wb,{bookType:'xlsx',type:'array'})])})}catch(e){if(!e||e.code!='declined')alert('تعذر حفظ الملف')}};
+$('#exm').onclick=async()=>{
+ if(!window.ExcelJS||!DL)return alert('التصدير غير متاح الآن');
+ try{
+ const c=S.c,i=mIdx(S.d),m=MN[i],y=YR(i),mo=MM[i],o=DB[c][m],x=stat(c,i),all=[];
+ for(let d=1;d<=31;d++){const t=new Date(y,mo-1,d);if(t.getMonth()!=mo-1)break;if(t.getDay())all.push([y+'-'+pad(mo)+'-'+pad(d),t.getDay()])}
+ const NC=27,nR=Math.max([26,29,30,30,30,30,30,30,30,30][i],o.s.length),S0=8,last=S0+nR-1,p1=last+2,p2=last+3,h1=last+6,h2=h1+1,h3=h1+2;
+ const Hd=x.D.length*2,out=k=>(o.m[k]||{}).n=='لم يلتحق',CL=n=>n>26?'A'+String.fromCharCode(38+n):String.fromCharCode(64+n);
+ const ws=(()=>{const wb=new ExcelJS.Workbook();const ws0=wb.addWorksheet(m,{views:[{rightToLeft:true,zoomScale:88}],properties:{tabColor:{argb:'FF1F3864'}},pageSetup:{paperSize:9,orientation:'portrait',fitToPage:true,fitToWidth:1,fitToHeight:1,horizontalCentered:true,printArea:'A1:AH'+p2,margins:{left:.354,right:.354,top:.197,bottom:.394,header:0,footer:.315}}});ws0.wb=wb;return ws0})();
+ const T={style:'thin',color:{argb:'FF000000'}},M={style:'medium',color:{argb:'FF000000'}},B4=(l,r,t,b)=>({left:l,right:r,top:t,bottom:b});
+ const sc=(r,q,p)=>{const k=ws.getCell(r,q);if(p.v!==undefined)k.value=p.v;
+  k.font={name:'Arial',size:p.sz||11,bold:p.b!==false,color:{argb:'FF'+(p.col||'000000')}};
+  if(p.fill)k.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF'+p.fill}};
+  k.alignment={horizontal:p.h||'center',vertical:'middle',wrapText:p.w!==false,textRotation:p.rot||0};
+  k.border=p.bd||B4(T,T,T,T);if(p.nf)k.numFmt=p.nf;return k};
+ const blk=(r1,c1,r2,c2,p)=>{for(let r=r1;r<=r2;r++)for(let q=c1;q<=c2;q++)sc(r,q,{...p,v:undefined});if(r1!=r2||c1!=c2)ws.mergeCells(r1,c1,r2,c2);sc(r1,c1,p)};
+ ws.getColumn(1).width=4.78;ws.getColumn(2).width=25.78;ws.getColumn(3).width=5.78;
+ for(let q=4;q<=30;q++)ws.getColumn(q).width=4.33;for(let q=31;q<=33;q++)ws.getColumn(q).width=7.44;ws.getColumn(34).width=10.78;
+ const HT={1:40.05,2:40.05,3:7.5,4:49.95,5:75,6:30,7:34.95};for(const r in HT)ws.getRow(+r).height=HT[r];
+ for(let r=S0;r<=last;r++)ws.getRow(r).height=34.5;ws.getRow(last+1).height=9.75;ws.getRow(p1).height=40.05;ws.getRow(p2).height=40.05;ws.getRow(h1).height=20.25;
+ // الترويسة
+ const ms=o.s.filter(s=>s[1]=='م').length,fs=o.s.length-ms;
+ blk(1,1,2,4,{fill:'FDEADA',sz:16});blk(1,6,2,9,{v:m,sz:36,fill:'558ED5'});blk(1,10,2,12,{v:y,sz:26,fill:'8DB4E3'});blk(1,13,2,15,{v:c,sz:16,fill:'FFFF00'});
+ [[16,17,'ذكور','COUNTIF($C$'+S0+':$C$'+last+',"ذكر")',ms],[18,19,'إناث','COUNTIF($C$'+S0+':$C$'+last+',"أنثى")',fs],[20,22,'المجموع','COUNTA($B$'+S0+':$B$'+last+')',o.s.length]].forEach(([a,b,l,f,r])=>{blk(1,a,1,b,{v:l,sz:18,fill:'D9D2E9'});blk(2,a,2,b,{v:{formula:f,result:r},sz:16})});
+ blk(1,23,2,30,{v:'عدد أنصاف أيام الدراسة :',sz:20,fill:'EBF1DE'});
+ blk(1,31,2,32,{v:{formula:`SUM($D$${h2}:$AD$${h2})*2`,result:Hd},sz:26,col:'1F2A9C',fill:'C3D69B'});
+ // رأس الجدول
+ blk(4,1,6,2,{v:'اسم المتعلم(ة)',sz:24,fill:'C6D9F1'});blk(4,3,7,3,{v:'النوع',sz:20,fill:'C6D9F1',rot:90});
+ blk(4,4,4,30,{v:'بيان التغيبات لكل يوم من الشهر',sz:24,fill:'8DB4E3'});
+ [['أنصاف أيام الدراسة',31],['مجموع غياب الشهر',32],['أنصاف أيام الحضور',33]].forEach(([t,q])=>blk(4,q,7,q,{v:t,sz:20,fill:'C6D9F1',rot:90}));
+ blk(4,34,7,34,{v:'ملاحظات',sz:20,fill:'DDD9C3',rot:90});blk(7,1,7,2,{v:'عدد المتعلمين',sz:18,fill:'92D050'});
+ // الأيام
+ const hc=t=>/الفترة البينية/.test(t)?'FFE699':/الدخول المدرسي/.test(t)?'D9D2E9':/منتصف|عطلة/.test(t)?'9DC3E6':/الفطر|الأضحى|محرم/.test(t)?'A9D18E':'F4B183';
+ for(let j=0;j<NC;j++){const q=4+j,a=all[j],hol=a&&HOL[a[0]],fill=hol?hc(hol):'B7DEE8';
+  sc(5,q,{v:a?DN[a[1]]:undefined,sz:18,fill,rot:90});sc(6,q,{v:a?+a[0].slice(8):undefined,sz:14,fill});
+  sc(7,q,{v:{formula:`IF(${CL(q)}$6="","",COUNTA($B$${S0}:$B$${last}))`,result:a?o.s.length:''},sz:14,col:'1F2A9C',fill:'92D050'});
+  if(a){const d=ws.getCell(h1,q);d.value=new Date(Date.UTC(y,mo-1,+a[0].slice(8)));d.numFmt='dd/mm';ws.getCell(h2,q).value=isSch(a[0])?1:0}
+  for(const r of[h1,h2]){const k=ws.getCell(r,q);k.font={name:'Arial',size:8,color:{argb:'FF808080'}};k.alignment={horizontal:'center',vertical:'middle'}}}
+ // المتعلمون
+ for(let k=0;k<nR;k++){const r=S0+k,s=o.s[k],mk=o.m[k]||{},has=!!s,ae=has&&!out(k)?Hd:'',af=has&&!out(k)?x.per[k]:'';
+  sc(r,1,{v:has?{formula:'ROW()-ROW($A$7)',result:k+1}:undefined,sz:14});
+  sc(r,2,{v:has?s[0]:undefined,sz:22,b:false,h:'right',w:false});
+  const g=sc(r,3,{v:has?(s[1]=='م'?'ذكر':'أنثى'):undefined,sz:18,b:false,w:false});
+  g.dataValidation={type:'list',allowBlank:true,formulae:['"ذكر,أنثى"'],showErrorMessage:true,error:'اختر ذكر أو أنثى من القائمة'};
+  for(let j=0;j<NC;j++){const a=all[j];if(a&&HOL[a[0]])continue;
+   const z=sc(r,4+j,{v:a?mk[a[0].slice(5)]||undefined:undefined,sz:24});
+   z.dataValidation={type:'list',allowBlank:true,formulae:['"+,-"'],showErrorMessage:true,errorTitle:'قيمة غير صحيحة',error:'اختر + أو - فقط'}}
+  const nb=`OR($B${r}="",$AH${r}="لم يلتحق")`,st={sz:16,col:'1F2A9C',fill:'C6D9F1'};
+  sc(r,31,{...st,v:{formula:`IF(${nb},"",$AE$1)`,result:ae}});
+  sc(r,32,{...st,v:{formula:`IF(${nb},"",SUMPRODUCT($D$${h2}:$AD$${h2}*(($D${r}:$AD${r}="+")*2+($D${r}:$AD${r}="-")*1)))`,result:af}});
+  sc(r,33,{...st,v:{formula:`IF(AF${r}="","",AE${r}-AF${r})`,result:ae===''?'':ae-af}});
+  sc(r,34,{v:mk.n||undefined,sz:12})}
+ // كتل العطل المدمجة
+ for(let j=0;j<all.length;){const t=HOL[all[j][0]];if(!t){j++;continue}let e=j;while(e+1<all.length&&HOL[all[e+1][0]]==t)e++;
+  const f=hc(t);blk(S0,4+j,last,4+e,{v:t.replace(/\s*\(.*\)/,''),sz:16,fill:f,col:f=='D9D2E9'?'262626':'000000',rot:e==j?90:0});j=e+1}
+ ws.addConditionalFormatting({ref:`B${S0}:C${last}`,rules:[{type:'expression',priority:1,formulae:[`$C${S0}="أنثى"`],style:{fill:{type:'pattern',pattern:'solid',bgColor:{argb:'FFFFC0CB'}}}},{type:'expression',priority:2,formulae:[`$C${S0}="ذكر"`],style:{fill:{type:'pattern',pattern:'solid',bgColor:{argb:'FFC6EFCE'}}}}]});
+ // النسبة المئوية الشهرية
+ const TOT=o.s.reduce((t,_,k)=>t+(out(k)?0:Hd),0),AB=o.s.reduce((t,_,k)=>t+x.per[k],0),R={sz:14,col:'C00000'};
+ blk(p1,12,p2,23,{v:'النسبة المئوية الشهرية للمواظبة =',sz:22,fill:'C6D9F1'});
+ blk(p1,24,p1,29,{v:'أنصاف أيام حضور التلاميذ',sz:12,fill:'C6D9F1'});blk(p2,24,p2,29,{v:'أنصاف أيام الدراسة',sz:12,fill:'C6D9F1'});
+ blk(p1,30,p2,30,{v:'100 ×',sz:11,fill:'C6D9F1'});
+ sc(p1,31,{...R,v:{formula:`SUM(AE${S0}:AE${last})`,result:TOT},bd:B4(M,T,M,T)});
+ sc(p1,32,{...R,v:{formula:`SUM(AF${S0}:AF${last})`,result:AB},bd:B4(T,T,M,T)});
+ sc(p1,33,{...R,v:{formula:`AE${p1}-AF${p1}`,result:TOT-AB},bd:B4(T,M,M,T)});
+ sc(p2,31,{v:'%',sz:12,bd:B4(M,T,T,M)});
+ blk(p2,32,p2,33,{v:{formula:`IF(AE${p1}=0,0,ROUNDDOWN(AG${p1}*100/AE${p1},2))`,result:TOT?Math.floor((TOT-AB)*10000/TOT)/100:0},sz:20,col:'C00000',nf:'0.00',bd:B4(T,M,T,M)});
+ // الصفوف المساعدة (خارج منطقة الطباعة)
+ [[h1,'(مساعد) التواريخ'],[h2,'(مساعد) يوم محتسب 1/0'],[h3,'(مساعد) رقم الشهر']].forEach(([r,t])=>{const k=ws.getCell(r,2);k.value=t;k.font={name:'Arial',size:8,color:{argb:'FF808080'}};k.alignment={horizontal:'right',vertical:'middle',wrapText:true}});
+ ws.getCell(h3,4).value=mo;ws.getCell(h3,4).font={name:'Arial',size:8,color:{argb:'FF808080'}};
+ await DL.save({filename:'صفحة-'+m+'-'+c+'.xlsx',data:new Blob([await ws.wb.xlsx.writeBuffer()])});
+ }catch(e){if(!e||e.code!='declined')alert('تعذر حفظ الملف')}};
+$('#ins').onclick=()=>alert('لتثبيت التطبيق على أندرويد:\n1) افتح الرابط في Chrome.\n2) اضغط القائمة ⋮ في أعلى الشاشة.\n3) اختر «إضافة إلى الشاشة الرئيسية» أو «تثبيت التطبيق».\n4) اضغط «إضافة».');
+render();
+</script></body></html>
